@@ -1,0 +1,87 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == "success" %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle me-1"></i>
+              {{message}}
+              <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="alert" aria-label="Close">X</button>
+      </div>
+    {% else %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <i class="bi bi-exclamation-octagon me-1"></i>
+      {{message}}
+    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="alert" aria-label="Close">X</button>
+    </div>
+    {% endif %}  
+    {% endfor %}
+    {% endif %} 
+
+    <div class="card-box mb-30">
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <br>
+        <h3 class="text-primary" align="center">REGISTRO DE NUEVO USUARIO</h3>
+        
+        <div class="container">
+            <div class="row row-cols-2">
+                <div class="col">
+                    <label>{{form.username.label_tag}}</label>
+                    {{form.username}}
+                </div>
+                <div class="col">
+                    <label>{{form.password.label_tag}}</label>
+                    {{form.password}}
+                </div>
+                <div class="col">
+                    <label>{{form.first_name.label_tag}}</label>
+                    {{form.first_name}}
+                </div>
+                <div class="col">
+                    <label>{{form.last_name.label_tag}}</label>
+                    {{form.last_name}}
+                </div>
+                <div class="col">
+                    <label>{{form.email.label_tag}}</label>
+                    {{form.email}}
+                </div>
+                <div class="col">
+                    <label>{{form.direccion.label_tag}}</label>
+                    {{form.direccion}}
+                </div>
+                <div class="col">
+                    <label>{{form.direccion2.label_tag}}</label>
+                    {{form.direccion2}}
+                </div>
+                <div class="col">
+                    <label>{{form.tel.label_tag}}</label>
+                    {{form.tel}}
+                </div>
+                <div class="col">
+                    <label>{{form.ciudad.label_tag}}</label>
+                    {{form.ciudad}}
+                </div>
+                <div class="col">
+                    <label>{{form.departamento.label_tag}}</label>
+                    {{form.departamento}}
+                </div>
+                <div class="col">
+                <button type="submit" class="btn btn-success">Registrarse</button>
+                <button type="reset" class="btn btn-danger">Cancelar</button>
+                </div>
+                
+            </div>
+        </div>
+        
+       
+    <br>
+    </form>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="container overflow-hidden">
+            <h3>Modificacion de Usuario <strong class="text-danger">{{d}}</strong></h3><hr><br>
+            <div class="row gy-5">
+            {{form.as_p}}
+            </div>
+        </div>
+        
+         <div class="container" align="center">
+            <button class="btn btn-primary" type="submit">Modificar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+         </div>
+
+    </form>
+</div>        
+
+{% endblock %}

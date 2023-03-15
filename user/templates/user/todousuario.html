@@ -1,0 +1,64 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if messages %}
+          <ul class="messages">
+          {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+{% endif %} 
+<div class="container">
+    <div class="card-box mb-30"><br>
+        <h4 align="center" class="text-primary">LISTADO DE USUARIOS</h4>
+        <br>
+        <table class="table table-hover table-bordered table-sm">
+            <thead align="center">
+              <tr>
+                <th scope="col">Usuario</th>
+                <th scope="col">Nombres de Usuario</th>
+                <th scope="col">Rol de Sistema</th>
+                <th scope="col">Acceso a Panel</th>
+                <th scope="col">Privilegios Super Usuario</th>
+                <th scope="col">Activo</th>
+                <th scope="col">Accion</th>
+              </tr>
+            </thead>
+            <tbody align="center">
+              {% for u in usuarios %}
+              <tr>
+                <th scope="row">{{u.username}}</th>
+                <td>{{u.first_name}} {{u.last_name}}</td>
+                <td>{{u.rol}}</td>
+                {% if u.is_staff == True %}
+                <td class="table-success">Si</td>
+                {% else %}
+                <td class="table-danger">No</td>
+                {% endif %}
+                {% if u.is_superuser == True %}
+                <td class="table-success">Si</td>
+                {% else %}
+                <td class="table-danger">No</td>
+                {% endif %}
+                {% if u.is_active == True %}
+                <td class="table-success">Si</td>
+                {% else %}
+                <td class="table-danger">No</td>
+                {% endif %}
+                <td>
+                    <a class="btn btn-primary btn-sm" title="Modificar" type="button" href="{% url 'UpdateUser' u.username %}"><i class="mdi mdi-grease-pencil" aria-hidden="true"></i></a>
+                    <a class="btn btn-danger btn-sm" title="Eliminar" type="button" href="{% url 'DeleteUser' u.username %}"><i class="mdi mdi-delete" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>        
+
+{% endblock %}
